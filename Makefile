@@ -1,4 +1,4 @@
-obj-m := HUST_fs.o
+obj-m := TEST_fs.o
 TEST_fs-objs := inode.o map.o block.o file.o super.o
 
 all: drive mkfs
