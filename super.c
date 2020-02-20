@@ -20,6 +20,7 @@ const struct file_operations TEST_fs_file_ops = {
 
 const struct file_operations TEST_fs_dir_ops = {
 	.owner = THIS_MODULE,
+	.read = generic_read_dir,
 	.iterate = TEST_fs_iterate,
 };
 
@@ -113,8 +114,7 @@ int TEST_fs_fill_super(struct super_block *sb, void *data, int silent)
 			 S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 	root_inode->i_sb = sb;
 	root_inode->i_ino = TEST_ROOT_INODE_NUM;
-	root_inode->i_atime = root_inode->i_mtime = root_inode->i_ctime =
-	    current_time(root_inode);
+	root_inode->i_atime = root_inode->i_mtime = root_inode->i_ctime = CURRENT_TIME;
     
     root_inode->i_mode = raw_root_node.mode;
     root_inode->i_size = raw_root_node.dir_children_count;
